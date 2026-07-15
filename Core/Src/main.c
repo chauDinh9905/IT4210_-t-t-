@@ -56,20 +56,13 @@
 
 #define I2C3_TIMEOUT_MAX                    0x3000 /*<! The value of the maximal timeout for I2C waiting loops */
 #define SPI5_TIMEOUT_MAX                    0x1000
-// --- UP Button (GPIO C, Pin 12) ---
-#define UP_PORT     GPIOC
-#define UP_PIN      GPIO_PIN_12
 
-// --- DOWN Button (GPIO C, Pin 10) ---
-#define DOWN_PORT   GPIOC
-#define DOWN_PIN    GPIO_PIN_10
 
-// --- LEFT Button (GPIO A, Pin 15) ---
-// ("còn lại là a" -> Left là A)
+// --- LEFT Button (PA15) ---
 #define LEFT_PORT   GPIOA
 #define LEFT_PIN    GPIO_PIN_15
 
-// --- RIGHT Button (GPIO C, Pin 11) ---
+// --- RIGHT Button (PC11) ---
 #define RIGHT_PORT  GPIOC
 #define RIGHT_PIN   GPIO_PIN_11
 

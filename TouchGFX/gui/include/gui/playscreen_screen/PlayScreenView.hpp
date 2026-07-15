@@ -6,10 +6,6 @@
 #include <touchgfx/widgets/Image.hpp>
 #include <touchgfx/widgets/AnimatedImage.hpp>
 
-enum EnemyType
-{
-	ENEMY_BLUE, ENEMY_GREEN
-};
 enum EnemyMoveDirection
 {
 	MOVE_IDLE, MOVE_DOWN, MOVE_LEFT, MOVE_UP, MOVE_RIGHT
