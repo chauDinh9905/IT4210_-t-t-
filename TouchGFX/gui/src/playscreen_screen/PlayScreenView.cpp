@@ -196,6 +196,8 @@ void PlayScreenView::spawnBullet()
 			bulletImages[i].setXY(bulletStates[i].x, bulletStates[i].y);
 			bulletImages[i].setVisible(true);
 			bulletImages[i].invalidate();
+			uint8_t msg = 'S';
+			osMessageQueuePut(buzzerQueueHandle, &msg, 0, 0);
 			return;
 		}
 	}
