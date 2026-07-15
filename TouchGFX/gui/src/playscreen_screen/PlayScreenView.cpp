@@ -41,12 +41,20 @@ void PlayScreenView::setupScreen()
 			enemies[r][c].x = startX + c * (imgSize + spacingX);
 			enemies[r][c].y = startY + r * (imgSize + spacingY);
 			enemies[r][c].alive = true;
-			enemies[r][c].type = ((r + c) % 2 == 0) ? ENEMY_BLUE : ENEMY_GREEN;
+			if((r + c) % 3 == 0){
+				enemies[r][c].type = ENEMY_RED;
+			}
+			else if((r + c) % 3 == 0){
+				enemies[r][c].type = ENEMY_GREEN;
+			}
+			else enemies[r][c].type = MINE;
 
-			if (enemies[r][c].type == 1)
+			if (enemies[r][c].type == ENEMY_RED)
 				enemyImages[r][c].setBitmap(Bitmap(BITMAP_ENEMY_1_R_M_ID));
-			else
+			else if(enemies[r][c].type == ENEMY_GREEN)
 				enemyImages[r][c].setBitmap(Bitmap(BITMAP_ENEMY_2_G_M_ID));
+			else
+				enemyImages[r][c].setBitmap(Bitmap(BITMAP_MINE_1_07_ID));
 
 			enemyImages[r][c].setXY(enemies[r][c].x, enemies[r][c].y);
 			add (enemyImages[r][c]);

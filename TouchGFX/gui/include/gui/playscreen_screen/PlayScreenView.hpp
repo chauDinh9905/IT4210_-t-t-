@@ -10,6 +10,12 @@ enum EnemyMoveDirection
 {
 	MOVE_IDLE, MOVE_DOWN, MOVE_LEFT, MOVE_UP, MOVE_RIGHT
 };
+
+enum EnemyType
+{
+	ENEMY_RED, ENEMY_GREEN, MINE
+};
+
 struct Enemy
 {
 	int16_t x;

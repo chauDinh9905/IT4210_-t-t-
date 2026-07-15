@@ -103,6 +103,46 @@
               "UseBuffer": true,
               "BufferSize": 6
             }
+          },
+          {
+            "Type": "Image",
+            "Name": "enemiesBullet",
+            "Width": 9,
+            "Height": 10,
+            "Visible": false,
+            "RelativeFilename": "enemies_bullet.png"
+          },
+          {
+            "Type": "Image",
+            "Name": "redEnemy",
+            "Width": 64,
+            "Height": 64,
+            "Visible": false,
+            "RelativeFilename": "enemy_1_r_m.png"
+          },
+          {
+            "Type": "Image",
+            "Name": "greenEnemy",
+            "Width": 64,
+            "Height": 64,
+            "Visible": false,
+            "RelativeFilename": "enemy_2_g_m.png"
+          },
+          {
+            "Type": "Image",
+            "Name": "mine",
+            "Width": 48,
+            "Height": 48,
+            "Visible": false,
+            "RelativeFilename": "mine_1_07.png"
+          },
+          {
+            "Type": "Image",
+            "Name": "playerBullet",
+            "Width": 9,
+            "Height": 22,
+            "Visible": false,
+            "RelativeFilename": "player_bullet.png"
           }
         ],
         "Interactions": [

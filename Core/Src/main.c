@@ -57,7 +57,6 @@
 #define I2C3_TIMEOUT_MAX                    0x3000 /*<! The value of the maximal timeout for I2C waiting loops */
 #define SPI5_TIMEOUT_MAX                    0x1000
 
-
 // --- LEFT Button (PA15) ---
 #define LEFT_PORT   GPIOA
 #define LEFT_PIN    GPIO_PIN_15
@@ -93,31 +92,25 @@ SDRAM_HandleTypeDef hsdram1;
 
 /* Definitions for defaultTask */
 osThreadId_t defaultTaskHandle;
-const osThreadAttr_t defaultTask_attributes =
-{ .name = "defaultTask", .stack_size = 128 * 4, .priority =
-		(osPriority_t) osPriorityNormal, };
+const osThreadAttr_t defaultTask_attributes = { .name = "defaultTask",
+		.stack_size = 128 * 4, .priority = (osPriority_t) osPriorityNormal, };
 /* Definitions for GUI_Task */
 osThreadId_t GUI_TaskHandle;
-const osThreadAttr_t GUI_Task_attributes =
-{ .name = "GUI_Task", .stack_size = 8196 * 4, .priority =
-		(osPriority_t) osPriorityNormal, };
+const osThreadAttr_t GUI_Task_attributes = { .name = "GUI_Task", .stack_size =
+		8196 * 4, .priority = (osPriority_t) osPriorityNormal, };
 /* Definitions for ButtonTask */
 osThreadId_t ButtonTaskHandle;
-const osThreadAttr_t ButtonTask_attributes =
-{ .name = "ButtonTask", .stack_size = 256 * 4, .priority =
-		(osPriority_t) osPriorityNormal, };
+const osThreadAttr_t ButtonTask_attributes = { .name = "ButtonTask",
+		.stack_size = 256 * 4, .priority = (osPriority_t) osPriorityNormal, };
 /* Definitions for buttonQueue */
 osMessageQueueId_t buttonQueueHandle;
-const osMessageQueueAttr_t buttonQueue_attributes =
-{ .name = "buttonQueue" };
+const osMessageQueueAttr_t buttonQueue_attributes = { .name = "buttonQueue" };
 /* Definitions for controlQueue */
 osMessageQueueId_t controlQueueHandle;
-const osMessageQueueAttr_t controlQueue_attributes =
-{ .name = "controlQueue" };
+const osMessageQueueAttr_t controlQueue_attributes = { .name = "controlQueue" };
 /* Definitions for buzzerQueue */
 osMessageQueueId_t buzzerQueueHandle;
-const osMessageQueueAttr_t buzzerQueue_attributes =
-{ .name = "buzzerQueue" };
+const osMessageQueueAttr_t buzzerQueue_attributes = { .name = "buzzerQueue" };
 /* USER CODE BEGIN PV */
 uint8_t isRevD = 0; /* Applicable only for STM32F429I DISCOVERY REVD and above */
 static volatile uint32_t last_interrupt_time = 0;
@@ -167,12 +160,10 @@ void IOE_Write(uint8_t Addr, uint8_t Reg, uint8_t Value);
 uint8_t IOE_Read(uint8_t Addr, uint8_t Reg);
 uint16_t IOE_ReadMultiple(uint8_t Addr, uint8_t Reg, uint8_t *pBuffer,
 		uint16_t Length);
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
-{
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 	uint32_t current_time = osKernelGetTickCount();
 
-	if ((current_time - last_interrupt_time) > DEBOUNCE_DELAY)
-	{
+	if ((current_time - last_interrupt_time) > DEBOUNCE_DELAY) {
 		last_interrupt_time = current_time;
 
 		uint32_t pin_to_send = (uint32_t) GPIO_Pin;
@@ -193,8 +184,7 @@ uint32_t Spi5Timeout = SPI5_TIMEOUT_MAX; /*<! Value of Timeout when SPI communic
  * @brief  The application entry point.
  * @retval int
  */
-int main(void)
-{
+int main(void) {
 
 	/* USER CODE BEGIN 1 */
 
@@ -292,8 +282,7 @@ int main(void)
 
 	/* Infinite loop */
 	/* USER CODE BEGIN WHILE */
-	while (1)
-	{
+	while (1) {
 		/* USER CODE END WHILE */
 
 		/* USER CODE BEGIN 3 */
@@ -305,12 +294,9 @@ int main(void)
  * @brief System Clock Configuration
  * @retval None
  */
-void SystemClock_Config(void)
-{
-	RCC_OscInitTypeDef RCC_OscInitStruct =
-	{ 0 };
-	RCC_ClkInitTypeDef RCC_ClkInitStruct =
-	{ 0 };
+void SystemClock_Config(void) {
+	RCC_OscInitTypeDef RCC_OscInitStruct = { 0 };
+	RCC_ClkInitTypeDef RCC_ClkInitStruct = { 0 };
 
 	/** Configure the main internal regulator output voltage
 	 */
@@ -328,15 +314,13 @@ void SystemClock_Config(void)
 	RCC_OscInitStruct.PLL.PLLN = 360;
 	RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
 	RCC_OscInitStruct.PLL.PLLQ = 4;
-	if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
-	{
+	if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK) {
 		Error_Handler();
 	}
 
 	/** Activate the Over-Drive mode
 	 */
-	if (HAL_PWREx_EnableOverDrive() != HAL_OK)
-	{
+	if (HAL_PWREx_EnableOverDrive() != HAL_OK) {
 		Error_Handler();
 	}
 
@@ -349,8 +333,7 @@ void SystemClock_Config(void)
 	RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
 	RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
 
-	if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5) != HAL_OK)
-	{
+	if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5) != HAL_OK) {
 		Error_Handler();
 	}
 }
@@ -360,8 +343,7 @@ void SystemClock_Config(void)
  * @param None
  * @retval None
  */
-static void MX_CRC_Init(void)
-{
+static void MX_CRC_Init(void) {
 
 	/* USER CODE BEGIN CRC_Init 0 */
 
@@ -371,8 +353,7 @@ static void MX_CRC_Init(void)
 
 	/* USER CODE END CRC_Init 1 */
 	hcrc.Instance = CRC;
-	if (HAL_CRC_Init(&hcrc) != HAL_OK)
-	{
+	if (HAL_CRC_Init(&hcrc) != HAL_OK) {
 		Error_Handler();
 	}
 	/* USER CODE BEGIN CRC_Init 2 */
@@ -386,8 +367,7 @@ static void MX_CRC_Init(void)
  * @param None
  * @retval None
  */
-static void MX_DMA2D_Init(void)
-{
+static void MX_DMA2D_Init(void) {
 
 	/* USER CODE BEGIN DMA2D_Init 0 */
 
@@ -404,12 +384,10 @@ static void MX_DMA2D_Init(void)
 	hdma2d.LayerCfg[1].InputColorMode = DMA2D_INPUT_RGB565;
 	hdma2d.LayerCfg[1].AlphaMode = DMA2D_NO_MODIF_ALPHA;
 	hdma2d.LayerCfg[1].InputAlpha = 0;
-	if (HAL_DMA2D_Init(&hdma2d) != HAL_OK)
-	{
+	if (HAL_DMA2D_Init(&hdma2d) != HAL_OK) {
 		Error_Handler();
 	}
-	if (HAL_DMA2D_ConfigLayer(&hdma2d, 1) != HAL_OK)
-	{
+	if (HAL_DMA2D_ConfigLayer(&hdma2d, 1) != HAL_OK) {
 		Error_Handler();
 	}
 	/* USER CODE BEGIN DMA2D_Init 2 */
@@ -423,8 +401,7 @@ static void MX_DMA2D_Init(void)
  * @param None
  * @retval None
  */
-static void MX_I2C3_Init(void)
-{
+static void MX_I2C3_Init(void) {
 
 	/* USER CODE BEGIN I2C3_Init 0 */
 
@@ -442,23 +419,20 @@ static void MX_I2C3_Init(void)
 	hi2c3.Init.OwnAddress2 = 0;
 	hi2c3.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
 	hi2c3.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
-	if (HAL_I2C_Init(&hi2c3) != HAL_OK)
-	{
+	if (HAL_I2C_Init(&hi2c3) != HAL_OK) {
 		Error_Handler();
 	}
 
 	/** Configure Analogue filter
 	 */
 	if (HAL_I2CEx_ConfigAnalogFilter(&hi2c3, I2C_ANALOGFILTER_DISABLE)
-			!= HAL_OK)
-	{
+			!= HAL_OK) {
 		Error_Handler();
 	}
 
 	/** Configure Digital filter
 	 */
-	if (HAL_I2CEx_ConfigDigitalFilter(&hi2c3, 0) != HAL_OK)
-	{
+	if (HAL_I2CEx_ConfigDigitalFilter(&hi2c3, 0) != HAL_OK) {
 		Error_Handler();
 	}
 	/* USER CODE BEGIN I2C3_Init 2 */
@@ -472,15 +446,13 @@ static void MX_I2C3_Init(void)
  * @param None
  * @retval None
  */
-static void MX_LTDC_Init(void)
-{
+static void MX_LTDC_Init(void) {
 
 	/* USER CODE BEGIN LTDC_Init 0 */
 
 	/* USER CODE END LTDC_Init 0 */
 
-	LTDC_LayerCfgTypeDef pLayerCfg =
-	{ 0 };
+	LTDC_LayerCfgTypeDef pLayerCfg = { 0 };
 
 	/* USER CODE BEGIN LTDC_Init 1 */
 
@@ -501,8 +473,7 @@ static void MX_LTDC_Init(void)
 	hltdc.Init.Backcolor.Blue = 0;
 	hltdc.Init.Backcolor.Green = 0;
 	hltdc.Init.Backcolor.Red = 0;
-	if (HAL_LTDC_Init(&hltdc) != HAL_OK)
-	{
+	if (HAL_LTDC_Init(&hltdc) != HAL_OK) {
 		Error_Handler();
 	}
 	pLayerCfg.WindowX0 = 0;
@@ -520,8 +491,7 @@ static void MX_LTDC_Init(void)
 	pLayerCfg.Backcolor.Blue = 0;
 	pLayerCfg.Backcolor.Green = 0;
 	pLayerCfg.Backcolor.Red = 0;
-	if (HAL_LTDC_ConfigLayer(&hltdc, &pLayerCfg, 0) != HAL_OK)
-	{
+	if (HAL_LTDC_ConfigLayer(&hltdc, &pLayerCfg, 0) != HAL_OK) {
 		Error_Handler();
 	}
 	/* USER CODE BEGIN LTDC_Init 2 */
@@ -540,8 +510,7 @@ static void MX_LTDC_Init(void)
  * @param None
  * @retval None
  */
-static void MX_SPI5_Init(void)
-{
+static void MX_SPI5_Init(void) {
 
 	/* USER CODE BEGIN SPI5_Init 0 */
 
@@ -563,8 +532,7 @@ static void MX_SPI5_Init(void)
 	hspi5.Init.TIMode = SPI_TIMODE_DISABLE;
 	hspi5.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
 	hspi5.Init.CRCPolynomial = 10;
-	if (HAL_SPI_Init(&hspi5) != HAL_OK)
-	{
+	if (HAL_SPI_Init(&hspi5) != HAL_OK) {
 		Error_Handler();
 	}
 	/* USER CODE BEGIN SPI5_Init 2 */
@@ -578,7 +546,7 @@ static void MX_SPI5_Init(void)
 	HAL_SPI_Receive(&hspi5, &pdata, 1, 1000);
 	HAL_GPIO_WritePin(SPI5_NCS_GPIO_Port, SPI5_NCS_Pin, GPIO_PIN_SET);
 	if (pdata == 0xD3) // 0b11010011
-	{
+			{
 		isRevD = 1;
 	}
 	/* USER CODE END SPI5_Init 2 */
@@ -590,19 +558,15 @@ static void MX_SPI5_Init(void)
  * @param None
  * @retval None
  */
-static void MX_TIM3_Init(void)
-{
+static void MX_TIM3_Init(void) {
 
 	/* USER CODE BEGIN TIM3_Init 0 */
 
 	/* USER CODE END TIM3_Init 0 */
 
-	TIM_ClockConfigTypeDef sClockSourceConfig =
-	{ 0 };
-	TIM_MasterConfigTypeDef sMasterConfig =
-	{ 0 };
-	TIM_OC_InitTypeDef sConfigOC =
-	{ 0 };
+	TIM_ClockConfigTypeDef sClockSourceConfig = { 0 };
+	TIM_MasterConfigTypeDef sMasterConfig = { 0 };
+	TIM_OC_InitTypeDef sConfigOC = { 0 };
 
 	/* USER CODE BEGIN TIM3_Init 1 */
 
@@ -613,31 +577,28 @@ static void MX_TIM3_Init(void)
 	htim3.Init.Period = 499;
 	htim3.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
 	htim3.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
-	if (HAL_TIM_Base_Init(&htim3) != HAL_OK)
-	{
+	if (HAL_TIM_Base_Init(&htim3) != HAL_OK) {
 		Error_Handler();
 	}
 	sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
-	if (HAL_TIM_ConfigClockSource(&htim3, &sClockSourceConfig) != HAL_OK)
-	{
+	if (HAL_TIM_ConfigClockSource(&htim3, &sClockSourceConfig) != HAL_OK) {
 		Error_Handler();
 	}
-	if (HAL_TIM_PWM_Init(&htim3) != HAL_OK)
-	{
+	if (HAL_TIM_PWM_Init(&htim3) != HAL_OK) {
 		Error_Handler();
 	}
 	sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
 	sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
-	if (HAL_TIMEx_MasterConfigSynchronization(&htim3, &sMasterConfig) != HAL_OK)
-	{
+	if (HAL_TIMEx_MasterConfigSynchronization(&htim3, &sMasterConfig)
+			!= HAL_OK) {
 		Error_Handler();
 	}
 	sConfigOC.OCMode = TIM_OCMODE_PWM1;
 	sConfigOC.Pulse = 250;
 	sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
 	sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
-	if (HAL_TIM_PWM_ConfigChannel(&htim3, &sConfigOC, TIM_CHANNEL_1) != HAL_OK)
-	{
+	if (HAL_TIM_PWM_ConfigChannel(&htim3, &sConfigOC, TIM_CHANNEL_1)
+			!= HAL_OK) {
 		Error_Handler();
 	}
 	/* USER CODE BEGIN TIM3_Init 2 */
@@ -652,8 +613,7 @@ static void MX_TIM3_Init(void)
  * @param None
  * @retval None
  */
-static void MX_USART1_UART_Init(void)
-{
+static void MX_USART1_UART_Init(void) {
 
 	/* USER CODE BEGIN USART1_Init 0 */
 
@@ -670,8 +630,7 @@ static void MX_USART1_UART_Init(void)
 	huart1.Init.Mode = UART_MODE_TX_RX;
 	huart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
 	huart1.Init.OverSampling = UART_OVERSAMPLING_16;
-	if (HAL_UART_Init(&huart1) != HAL_OK)
-	{
+	if (HAL_UART_Init(&huart1) != HAL_OK) {
 		Error_Handler();
 	}
 	/* USER CODE BEGIN USART1_Init 2 */
@@ -681,15 +640,13 @@ static void MX_USART1_UART_Init(void)
 }
 
 /* FMC initialization function */
-static void MX_FMC_Init(void)
-{
+static void MX_FMC_Init(void) {
 
 	/* USER CODE BEGIN FMC_Init 0 */
 
 	/* USER CODE END FMC_Init 0 */
 
-	FMC_SDRAM_TimingTypeDef SdramTiming =
-	{ 0 };
+	FMC_SDRAM_TimingTypeDef SdramTiming = { 0 };
 
 	/* USER CODE BEGIN FMC_Init 1 */
 
@@ -718,8 +675,7 @@ static void MX_FMC_Init(void)
 	SdramTiming.RPDelay = 2;
 	SdramTiming.RCDDelay = 2;
 
-	if (HAL_SDRAM_Init(&hsdram1, &SdramTiming) != HAL_OK)
-	{
+	if (HAL_SDRAM_Init(&hsdram1, &SdramTiming) != HAL_OK) {
 		Error_Handler();
 	}
 
@@ -737,10 +693,8 @@ static void MX_FMC_Init(void)
  * @param None
  * @retval None
  */
-static void MX_GPIO_Init(void)
-{
-	GPIO_InitTypeDef GPIO_InitStruct =
-	{ 0 };
+static void MX_GPIO_Init(void) {
+	GPIO_InitTypeDef GPIO_InitStruct = { 0 };
 	/* USER CODE BEGIN MX_GPIO_Init_1 */
 	/* USER CODE END MX_GPIO_Init_1 */
 
@@ -825,8 +779,7 @@ static void MX_GPIO_Init(void)
  * @retval None
  */
 static void BSP_SDRAM_Initialization_Sequence(SDRAM_HandleTypeDef *hsdram,
-		FMC_SDRAM_CommandTypeDef *Command)
-{
+		FMC_SDRAM_CommandTypeDef *Command) {
 	__IO uint32_t tmpmrd = 0;
 
 	/* Step 1:  Configure a clock configuration enable command */
@@ -883,8 +836,7 @@ static void BSP_SDRAM_Initialization_Sequence(SDRAM_HandleTypeDef *hsdram,
 /**
  * @brief  IOE Low Level Initialization.
  */
-void IOE_Init(void)
-{
+void IOE_Init(void) {
 	//Dummy function called when initializing to stmpe811 to setup the i2c.
 	//This is done with cubmx and is therfore not done here.
 }
@@ -892,8 +844,7 @@ void IOE_Init(void)
 /**
  * @brief  IOE Low Level Interrupt configuration.
  */
-void IOE_ITConfig(void)
-{
+void IOE_ITConfig(void) {
 	//Dummy function called when initializing to stmpe811 to setup interupt for the i2c.
 	//The interupt is not used in our case, therefore nothing is done here.
 }
@@ -904,8 +855,7 @@ void IOE_ITConfig(void)
  * @param  Reg: Reg Address
  * @param  Value: Data to be written
  */
-void IOE_Write(uint8_t Addr, uint8_t Reg, uint8_t Value)
-{
+void IOE_Write(uint8_t Addr, uint8_t Reg, uint8_t Value) {
 	I2C3_WriteData(Addr, Reg, Value);
 }
 
@@ -915,8 +865,7 @@ void IOE_Write(uint8_t Addr, uint8_t Reg, uint8_t Value)
  * @param  Reg: Reg Address
  * @retval The read data
  */
-uint8_t IOE_Read(uint8_t Addr, uint8_t Reg)
-{
+uint8_t IOE_Read(uint8_t Addr, uint8_t Reg) {
 	return I2C3_ReadData(Addr, Reg);
 }
 
@@ -929,8 +878,7 @@ uint8_t IOE_Read(uint8_t Addr, uint8_t Reg)
  * @retval 0 if no problems to read multiple data
  */
 uint16_t IOE_ReadMultiple(uint8_t Addr, uint8_t Reg, uint8_t *pBuffer,
-		uint16_t Length)
-{
+		uint16_t Length) {
 	return I2C3_ReadBuffer(Addr, Reg, pBuffer, Length);
 }
 
@@ -938,8 +886,7 @@ uint16_t IOE_ReadMultiple(uint8_t Addr, uint8_t Reg, uint8_t *pBuffer,
  * @brief  IOE Delay.
  * @param  Delay in ms
  */
-void IOE_Delay(uint32_t Delay)
-{
+void IOE_Delay(uint32_t Delay) {
 	HAL_Delay(Delay);
 }
 
@@ -949,16 +896,14 @@ void IOE_Delay(uint32_t Delay)
  * @param  Reg: The target register address to write
  * @param  Value: The target register value to be written
  */
-static void I2C3_WriteData(uint8_t Addr, uint8_t Reg, uint8_t Value)
-{
+static void I2C3_WriteData(uint8_t Addr, uint8_t Reg, uint8_t Value) {
 	HAL_StatusTypeDef status = HAL_OK;
 
 	status = HAL_I2C_Mem_Write(&hi2c3, Addr, (uint16_t) Reg,
 	I2C_MEMADD_SIZE_8BIT, &Value, 1, I2c3Timeout);
 
 	/* Check the communication status */
-	if (status != HAL_OK)
-	{
+	if (status != HAL_OK) {
 		/* Re-Initialize the BUS */
 		//I2Cx_Error();
 	}
@@ -970,8 +915,7 @@ static void I2C3_WriteData(uint8_t Addr, uint8_t Reg, uint8_t Value)
  * @param  Reg: The target register address to write
  * @retval Data read at register address
  */
-static uint8_t I2C3_ReadData(uint8_t Addr, uint8_t Reg)
-{
+static uint8_t I2C3_ReadData(uint8_t Addr, uint8_t Reg) {
 	HAL_StatusTypeDef status = HAL_OK;
 	uint8_t value = 0;
 
@@ -979,8 +923,7 @@ static uint8_t I2C3_ReadData(uint8_t Addr, uint8_t Reg)
 			1, I2c3Timeout);
 
 	/* Check the communication status */
-	if (status != HAL_OK)
-	{
+	if (status != HAL_OK) {
 		/* Re-Initialize the BUS */
 		//I2Cx_Error();
 	}
@@ -996,20 +939,16 @@ static uint8_t I2C3_ReadData(uint8_t Addr, uint8_t Reg)
  * @retval 0 if no problems to read multiple data
  */
 static uint8_t I2C3_ReadBuffer(uint8_t Addr, uint8_t Reg, uint8_t *pBuffer,
-		uint16_t Length)
-{
+		uint16_t Length) {
 	HAL_StatusTypeDef status = HAL_OK;
 
 	status = HAL_I2C_Mem_Read(&hi2c3, Addr, (uint16_t) Reg,
 	I2C_MEMADD_SIZE_8BIT, pBuffer, Length, I2c3Timeout);
 
 	/* Check the communication status */
-	if (status == HAL_OK)
-	{
+	if (status == HAL_OK) {
 		return 0;
-	}
-	else
-	{
+	} else {
 		/* Re-Initialize the BUS */
 		//I2Cx_Error();
 		return 1;
@@ -1021,8 +960,7 @@ static uint8_t I2C3_ReadBuffer(uint8_t Addr, uint8_t Reg, uint8_t *pBuffer,
  * @param  ReadSize: Number of bytes to read (max 4 bytes)
  * @retval Value read on the SPI
  */
-static uint32_t SPI5_Read(uint8_t ReadSize)
-{
+static uint32_t SPI5_Read(uint8_t ReadSize) {
 	HAL_StatusTypeDef status = HAL_OK;
 	uint32_t readvalue;
 
@@ -1030,8 +968,7 @@ static uint32_t SPI5_Read(uint8_t ReadSize)
 			Spi5Timeout);
 
 	/* Check the communication status */
-	if (status != HAL_OK)
-	{
+	if (status != HAL_OK) {
 		/* Re-Initialize the BUS */
 		SPI5_Error();
 	}
@@ -1043,15 +980,13 @@ static uint32_t SPI5_Read(uint8_t ReadSize)
  * @brief  Writes a byte to device.
  * @param  Value: value to be written
  */
-static void SPI5_Write(uint16_t Value)
-{
+static void SPI5_Write(uint16_t Value) {
 	HAL_StatusTypeDef status = HAL_OK;
 
 	status = HAL_SPI_Transmit(&hspi5, (uint8_t*) &Value, 1, Spi5Timeout);
 
 	/* Check the communication status */
-	if (status != HAL_OK)
-	{
+	if (status != HAL_OK) {
 		/* Re-Initialize the BUS */
 		SPI5_Error();
 	}
@@ -1060,16 +995,14 @@ static void SPI5_Write(uint16_t Value)
 /**
  * @brief  SPI5 error treatment function.
  */
-static void SPI5_Error(void)
-{
+static void SPI5_Error(void) {
 	/* De-initialize the SPI communication BUS */
 	//HAL_SPI_DeInit(&SpiHandle);
 	/* Re- Initialize the SPI communication BUS */
 	//SPIx_Init();
 }
 
-void LCD_IO_Init(void)
-{
+void LCD_IO_Init(void) {
 	/* Set or Reset the control line */
 	HAL_GPIO_WritePin(GPIOC, GPIO_PIN_2, GPIO_PIN_RESET);
 	HAL_GPIO_WritePin(GPIOC, GPIO_PIN_2, GPIO_PIN_SET);
@@ -1078,8 +1011,7 @@ void LCD_IO_Init(void)
 /**
  * @brief  Writes register value.
  */
-void LCD_IO_WriteData(uint16_t RegValue)
-{
+void LCD_IO_WriteData(uint16_t RegValue) {
 	/* Set WRX to send data */
 	HAL_GPIO_WritePin(GPIOD, GPIO_PIN_13, GPIO_PIN_SET);
 
@@ -1094,8 +1026,7 @@ void LCD_IO_WriteData(uint16_t RegValue)
 /**
  * @brief  Writes register address.
  */
-void LCD_IO_WriteReg(uint8_t Reg)
-{
+void LCD_IO_WriteReg(uint8_t Reg) {
 	/* Reset WRX to send command */
 	HAL_GPIO_WritePin(GPIOD, GPIO_PIN_13, GPIO_PIN_RESET);
 
@@ -1113,8 +1044,7 @@ void LCD_IO_WriteReg(uint8_t Reg)
  * @param  ReadSize Number of bytes to read
  * @retval Content of the register value
  */
-uint32_t LCD_IO_ReadData(uint16_t RegValue, uint8_t ReadSize)
-{
+uint32_t LCD_IO_ReadData(uint16_t RegValue, uint8_t ReadSize) {
 	uint32_t readvalue = 0;
 
 	/* Select: Chip Select low */
@@ -1140,8 +1070,7 @@ uint32_t LCD_IO_ReadData(uint16_t RegValue, uint8_t ReadSize)
  * @brief  Wait for loop in ms.
  * @param  Delay in ms.
  */
-void LCD_Delay(uint32_t Delay)
-{
+void LCD_Delay(uint32_t Delay) {
 	HAL_Delay(Delay);
 }
 
@@ -1154,14 +1083,13 @@ void LCD_Delay(uint32_t Delay)
  * @retval None
  */
 /* USER CODE END Header_StartDefaultTask */
-void StartDefaultTask(void *argument)
-{
+void StartDefaultTask(void *argument) {
 	/* USER CODE BEGIN 5 */
 	char msg;
 
 	// Đổi tên ARR thành PSC_VAL cho đỡ nhầm.
 	// Clock TIM3 = 90MHz. Chia (89+1) = 90 => Timer chạy 1MHz (1us/tick)
-	const uint32_t BASE_FRE = 90000000;
+//	const uint32_t BASE_FRE = 90000000;
 	const uint32_t PSC_VAL = 89;
 
 	// 1. Cài đặt Prescaler cứng ngay từ đầu để đảm bảo Timer chạy đúng 1MHz
@@ -1172,16 +1100,13 @@ void StartDefaultTask(void *argument)
 	__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, 0);
 	HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1);
 
-	for (;;)
-	{
+	for (;;) {
 		// Chờ tin nhắn từ Queue (Block vô hạn cho đến khi có tin)
 		if (osMessageQueueGet(buzzerQueueHandle, &msg, NULL, osWaitForever)
-				== osOK)
-		{
+				== osOK) {
 			uint32_t arr_val = 0;
 
-			switch (msg)
-			{
+			switch (msg) {
 			case 'W':   // Win - Bắn trúng (Tiếng cao, ngắn)
 				// f = 3kHz => T = 1/3000 s = 333us
 				// Vì timer chạy 1MHz (1us) => cần đếm 333 tick
@@ -1223,37 +1148,33 @@ void StartDefaultTask(void *argument)
  * @retval None
  */
 /* USER CODE END Header_StartButtonTask */
-void StartButtonTask(void *argument)
-{
+void StartButtonTask(void *argument) {
 	/* USER CODE BEGIN StartButtonTask */
 	uint32_t received_pin;
 	osStatus_t status;
 	char msg[64];
 	char cmd = 0; // Biến để chứa lệnh điều khiển (U, D, L, R)
 
-	for (;;)
-	{
+	for (;;) {
 		//Nhận tín hiệu từ Button Queue (chờ mãi mãi cho đến khi có nút nhấn)
 		status = osMessageQueueGet(buttonQueueHandle, &received_pin, NULL,
 		osWaitForever);
 
 		uint16_t clean_pin = received_pin & 0xFFFF;
 
-		if (status == osOK)
-		{
+		if (status == osOK) {
 			cmd = 0; // Reset lệnh trước khi check
 
-			switch (clean_pin)
-			{
-			case UP_PIN:
-				sprintf(msg, "Button UP Pressed (0x%04X)\r\n", clean_pin);
-				cmd = 'U'; // Gán lệnh Up
-				break;
-
-			case DOWN_PIN:
-				sprintf(msg, "Button DOWN Pressed (0x%04X)\r\n", clean_pin);
-				cmd = 'D'; // Gán lệnh Down
-				break;
+			switch (clean_pin) {
+//			case UP_PIN:
+//				sprintf(msg, "Button UP Pressed (0x%04X)\r\n", clean_pin);
+//				cmd = 'U'; // Gán lệnh Up
+//				break;
+//
+//			case DOWN_PIN:
+//				sprintf(msg, "Button DOWN Pressed (0x%04X)\r\n", clean_pin);
+//				cmd = 'D'; // Gán lệnh Down
+//				break;
 
 			case LEFT_PIN:
 				sprintf(msg, "Button LEFT Pressed (0x%04X)\r\n", clean_pin);
@@ -1275,8 +1196,7 @@ void StartButtonTask(void *argument)
 			HAL_UART_Transmit(&huart1, (uint8_t*) msg, strlen(msg), 100);
 
 			// Gửi lệnh vào Control Queue để TouchGFX xử lý
-			if (cmd != 0)
-			{
+			if (cmd != 0) {
 				// osMessageQueuePut(QueueHandle, &data, Priority, Timeout)
 				// Timeout = 0: Nếu queue đầy thì bỏ qua ngay, không block task này
 				osMessageQueuePut(controlQueueHandle, &cmd, 0, 0);
@@ -1294,13 +1214,11 @@ void StartButtonTask(void *argument)
  * @param  htim : TIM handle
  * @retval None
  */
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
-{
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 	/* USER CODE BEGIN Callback 0 */
 
 	/* USER CODE END Callback 0 */
-	if (htim->Instance == TIM6)
-	{
+	if (htim->Instance == TIM6) {
 		HAL_IncTick();
 	}
 	/* USER CODE BEGIN Callback 1 */
@@ -1312,8 +1230,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
  * @brief  This function is executed in case of error occurrence.
  * @retval None
  */
-void Error_Handler(void)
-{
+void Error_Handler(void) {
 	/* USER CODE BEGIN Error_Handler_Debug */
 	/* User can add his own implementation to report the HAL error return state */
 
