@@ -7,18 +7,18 @@
           {
             "Type": "FlexButton",
             "Name": "playButton",
-            "X": 70,
+            "X": 65,
             "Y": 194,
-            "Width": 104,
-            "Height": 62,
+            "Width": 109,
+            "Height": 59,
             "ButtonTrigger": {
               "Type": "ClickButtonTrigger"
             },
             "ButtonStyles": [
               {
                 "Type": "BoxWithBorderButtonStyle",
-                "Width": 104,
-                "Height": 62,
+                "Width": 109,
+                "Height": 59,
                 "LockToFlexButtonSize": true,
                 "BorderSize": 5,
                 "ColorReleased": {
@@ -43,15 +43,16 @@
           },
           {
             "Type": "Image",
-            "Name": "homeScreenBase",
+            "Name": "Background",
+            "X": 2,
             "Width": 240,
             "Height": 320,
-            "RelativeFilename": "home_screen.png"
+            "RelativeFilename": "HomeBackground.png"
           }
         ],
         "Interactions": [
           {
-            "InteractionName": "Interaction1",
+            "InteractionName": "playInteraction",
             "Trigger": {
               "Type": "TriggerClicked",
               "TriggerComponent": "playButton"
@@ -69,34 +70,34 @@
         "Components": [
           {
             "Type": "Image",
-            "Name": "playScreenBase",
+            "Name": "playScreen",
             "Width": 240,
             "Height": 320,
-            "RelativeFilename": "play_screen_base.png"
+            "RelativeFilename": "PlayGround.png"
           },
           {
             "Type": "Image",
             "Name": "player",
             "X": 104,
-            "Y": 255,
+            "Y": 274,
             "Width": 32,
             "Height": 32,
-            "RelativeFilename": "player.png"
+            "RelativeFilename": "player_r_m.png"
           },
           {
             "Type": "TextArea",
-            "Name": "scoreText",
-            "X": 49,
-            "Width": 65,
-            "Height": 25,
+            "Name": "score",
+            "X": 73,
+            "Y": 2,
+            "Width": 74,
+            "Height": 26,
             "TextId": "__SingleUse_EUOT",
             "TextRotation": "0",
             "Color": {
-              "Red": 199,
-              "Green": 170,
-              "Blue": 44
+              "Red": 255,
+              "Green": 222,
+              "Blue": 89
             },
-            "AutoSize": true,
             "Wildcard1": {
               "TextId": "__SingleUse_NY11",
               "UseBuffer": true,
@@ -130,9 +131,9 @@
         "Components": [
           {
             "Type": "FlexButton",
-            "Name": "cancelButton",
-            "X": 31,
-            "Y": 158,
+            "Name": "homeButton",
+            "X": 81,
+            "Y": 230,
             "Width": 78,
             "Height": 42,
             "ButtonTrigger": {
@@ -168,8 +169,8 @@
           {
             "Type": "FlexButton",
             "Name": "retryButton",
-            "X": 131,
-            "Y": 156,
+            "X": 81,
+            "Y": 162,
             "Width": 78,
             "Height": 46,
             "ButtonTrigger": {
@@ -204,24 +205,24 @@
           },
           {
             "Type": "Image",
-            "Name": "gameOverScreenBase",
+            "Name": "gameOver",
             "Width": 240,
             "Height": 320,
-            "RelativeFilename": "game_over_screen_base.png"
+            "RelativeFilename": "GameOver.png"
           },
           {
             "Type": "TextArea",
             "Name": "scoreText",
-            "X": 164,
-            "Y": 90,
-            "Width": 65,
-            "Height": 25,
+            "X": 136,
+            "Y": 109,
+            "Width": 55,
+            "Height": 21,
             "TextId": "__SingleUse_J1D0",
             "TextRotation": "0",
             "Color": {
-              "Red": 199,
-              "Green": 170,
-              "Blue": 44
+              "Red": 255,
+              "Green": 222,
+              "Blue": 89
             },
             "AutoSize": true,
             "Wildcard1": {
@@ -233,16 +234,16 @@
           {
             "Type": "TextArea",
             "Name": "highScoreText",
-            "X": 164,
-            "Y": 121,
-            "Width": 65,
-            "Height": 25,
+            "X": 137,
+            "Y": 131,
+            "Width": 55,
+            "Height": 21,
             "TextId": "__SingleUse_YZJY",
             "TextRotation": "0",
             "Color": {
-              "Red": 199,
-              "Green": 170,
-              "Blue": 44
+              "Red": 255,
+              "Green": 222,
+              "Blue": 89
             },
             "AutoSize": true,
             "Wildcard1": {
@@ -266,10 +267,10 @@
             }
           },
           {
-            "InteractionName": "cancelInteractionc",
+            "InteractionName": "homeInteraction",
             "Trigger": {
               "Type": "TriggerClicked",
-              "TriggerComponent": "cancelButton"
+              "TriggerComponent": "homeButton"
             },
             "Action": {
               "Type": "ActionGotoScreen",
