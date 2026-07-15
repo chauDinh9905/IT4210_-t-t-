@@ -115,24 +115,24 @@
           {
             "Type": "Image",
             "Name": "redEnemy",
-            "Width": 64,
-            "Height": 64,
+            "Width": 32,
+            "Height": 32,
             "Visible": false,
             "RelativeFilename": "enemy_1_r_m.png"
           },
           {
             "Type": "Image",
             "Name": "greenEnemy",
-            "Width": 64,
-            "Height": 64,
+            "Width": 32,
+            "Height": 32,
             "Visible": false,
             "RelativeFilename": "enemy_2_g_m.png"
           },
           {
             "Type": "Image",
             "Name": "mine",
-            "Width": 48,
-            "Height": 48,
+            "Width": 32,
+            "Height": 32,
             "Visible": false,
             "RelativeFilename": "mine_1_07.png"
           },
