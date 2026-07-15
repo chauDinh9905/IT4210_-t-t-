@@ -5,7 +5,7 @@
 #define BITMAP_BULLET_ID BITMAP_PLAYER_BULLET_ID
 #define ANIM_EXPLOSION_START  BITMAP_EXPLOSION_01_ID
 #define ANIM_EXPLOSION_END    BITMAP_EXPLOSION_02_ID
-#define BITMAP_MONSTER_BULLET_ID BITMAP_MONSTER_BULLET_ID
+
 extern osMessageQueueId_t buzzerQueueHandle;
 
 PlayScreenView::PlayScreenView()
@@ -43,10 +43,10 @@ void PlayScreenView::setupScreen()
 			enemies[r][c].alive = true;
 			enemies[r][c].type = ((r + c) % 2 == 0) ? ENEMY_BLUE : ENEMY_GREEN;
 
-			if (enemies[r][c].type == ENEMY_BLUE)
-				enemyImages[r][c].setBitmap(Bitmap(BITMAP_BLUE_32_ID));
+			if (enemies[r][c].type == 1)
+				enemyImages[r][c].setBitmap(Bitmap(BITMAP_ENEMY_1_R_M_ID));
 			else
-				enemyImages[r][c].setBitmap(Bitmap(BITMAP_GREEN_32_ID));
+				enemyImages[r][c].setBitmap(Bitmap(BITMAP_ENEMY_2_G_M_ID));
 
 			enemyImages[r][c].setXY(enemies[r][c].x, enemies[r][c].y);
 			add (enemyImages[r][c]);
@@ -84,7 +84,7 @@ void PlayScreenView::setupScreen()
 	for (uint8_t i = 0; i < MAX_ENEMY_BULLETS; i++)
 	{
 		enemyBulletStates[i].isActive = false;
-		enemyBulletImages[i].setBitmap(Bitmap(BITMAP_MONSTER_BULLET_ID)); // ID từ file của bạn
+		enemyBulletImages[i].setBitmap(Bitmap(BITMAP_ENEMIES_BULLET_ID)); // ID từ file của bạn
 		enemyBulletImages[i].setVisible(false);
 		add (enemyBulletImages[i]);
 	}

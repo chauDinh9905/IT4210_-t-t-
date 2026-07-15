@@ -86,7 +86,7 @@
           },
           {
             "Type": "TextArea",
-            "Name": "score",
+            "Name": "scoreText",
             "X": 73,
             "Y": 2,
             "Width": 74,
