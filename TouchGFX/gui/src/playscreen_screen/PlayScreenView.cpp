@@ -1,13 +1,17 @@
 #include <gui/playscreen_screen/PlayScreenView.hpp>
 #include <BitmapDatabase.hpp>
 #include <cmsis_os2.h>
+#include "audio_manager.h"
 
 #define BITMAP_BULLET_ID BITMAP_PLAYER_BULLET_ID
 #define ANIM_EXPLOSION_START  BITMAP_EXPLOSION_01_ID
 #define ANIM_EXPLOSION_END    BITMAP_EXPLOSION_02_ID
 #define BITMAP_MONSTER_BULLET_ID BITMAP_MONSTER_BULLET_ID
 extern osMessageQueueId_t buzzerQueueHandle;
-
+extern "C"
+{
+#include "audio_manager.h"
+}
 PlayScreenView::PlayScreenView()
     : currentEnemyFireRate(150),
       currentLevel(1),
@@ -188,6 +192,7 @@ void PlayScreenView::spawnBullet()
 			bulletImages[i].setXY(bulletStates[i].x, bulletStates[i].y);
 			bulletImages[i].setVisible(true);
 			bulletImages[i].invalidate();
+			Audio_Play(AUDIO_SHOOT);
 			return;
 		}
 	}
@@ -283,6 +288,7 @@ void PlayScreenView::checkCollisions()
 					uint8_t msg = 'W';
 					// priority 0, timeout 0 (để không bao giờ block game nếu queue đầy)
 					osMessageQueuePut(buzzerQueueHandle, &msg, 0, 0);
+					Audio_Play(AUDIO_HIT);
 					// Break loop enemy (Một viên đạn chỉ trúng 1 enemy tại 1 thời điểm)
 					goto next_bullet;
 				}
@@ -412,6 +418,7 @@ void PlayScreenView::checkPlayerHit()
 			//GỬI TÍN HIỆU ÂM THANH 'L' (LOSE)
 			uint8_t msg = 'L';
 			osMessageQueuePut(buzzerQueueHandle, &msg, 0, 0);
+			Audio_Play(AUDIO_LOSE);
 			// ----------------------------------------------
 			// Chuyển sang GameOver thông qua Action đã fix
 			presenter->goToGameOverScreen();

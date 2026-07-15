@@ -2,6 +2,7 @@
 #include <gui/playscreen_screen/PlayScreenPresenter.hpp>
 #include <gui/common/FrontendApplication.hpp>
 #include <stdint.h>
+#include "audio_manager.h"
 
 PlayScreenPresenter::PlayScreenPresenter(PlayScreenView &v) :
 		view(v)
@@ -11,7 +12,7 @@ PlayScreenPresenter::PlayScreenPresenter(PlayScreenView &v) :
 
 void PlayScreenPresenter::activate()
 {
-
+	Audio_Play(AUDIO_START);
 }
 
 void PlayScreenPresenter::deactivate()

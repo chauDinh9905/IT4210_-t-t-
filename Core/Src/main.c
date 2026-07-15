@@ -27,6 +27,8 @@
 #include "Components/ili9341/ili9341.h"
 #include <stdio.h>
 #include <string.h>
+#include "audio_manager.h"
+#include "uart_printf.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -237,7 +239,7 @@ int main(void)
 	/* Call PreOsInit function */
 	MX_TouchGFX_PreOSInit();
 	/* USER CODE BEGIN 2 */
-
+	UART_Printf_Init(&huart1);
 	/* USER CODE END 2 */
 
 	/* Init scheduler */
@@ -1287,6 +1289,7 @@ void StartButtonTask(void *argument)
 				// osMessageQueuePut(QueueHandle, &data, Priority, Timeout)
 				// Timeout = 0: Nếu queue đầy thì bỏ qua ngay, không block task này
 				osMessageQueuePut(controlQueueHandle, &cmd, 0, 0);
+				Audio_Play(AUDIO_BUTTON);
 			}
 		}
 	}
