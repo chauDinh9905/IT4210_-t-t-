@@ -44,7 +44,7 @@ void PlayScreenView::setupScreen()
 			if((r + c) % 3 == 0){
 				enemies[r][c].type = ENEMY_RED;
 			}
-			else if((r + c) % 3 == 0){
+			else if((r + c) % 3 == 1){
 				enemies[r][c].type = ENEMY_GREEN;
 			}
 			else enemies[r][c].type = MINE;
