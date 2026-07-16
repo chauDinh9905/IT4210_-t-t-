@@ -1105,7 +1105,8 @@ void StartDefaultTask(void *argument) {
 		if (osMessageQueueGet(buzzerQueueHandle, &msg, NULL, osWaitForever)
 				== osOK) {
 			uint32_t arr_val = 0;
-
+			uint8_t audioFrame[2] = { 0xAA, (uint8_t)msg };
+			HAL_UART_Transmit(&huart1, audioFrame, 2, 10);
 			switch (msg) {
 			case 'W':   // Win - Bắn trúng (Tiếng cao, ngắn)
 				// f = 3kHz => T = 1/3000 s = 333us
